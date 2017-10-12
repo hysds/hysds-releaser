@@ -32,56 +32,56 @@ UPLOAD_RE = re.compile(r'^(.+/assets){?.*$')
 
 FRAMEWORK_CFG = {
     "hysds-framework": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     }
 }
 
 
 REPO_CFGS = {
     "container-builder": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "figaro": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "grq2": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "hysds": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "hysds-dockerfiles": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "hysds_cluster_setup": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "hysds_commons": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "lightweight-jobs": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "mozart": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "osaka": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "prov_es": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "s3-bucket-listing": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "sciflo": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "spyddder-man": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     },
     "tosca": {
-        "owner": "hysds-org"
+        "owner": "hysds"
     }
 }
 
@@ -259,9 +259,15 @@ def upload_repo_asset(url, token, owner, fw_repo, new_rel_info, repo, repo_rel_i
     #archive_url = repo_rel_info['tarball_url']
 
     # use codeload url to get apprpriately named directory
+    #logging.info("repo_rel_info: {}".format(json.dumps(repo_rel_info, indent=2, sort_keys=True)))
     match = HOST_RE.search(repo_rel_info['html_url'])
     if not match: raise(RuntimeError("Failed to detect host from html_url"))
-    archive_url = "{}/_codeload/{}/{}/tar.gz/{}".format(match.group(1), match.group(2), match.group(3), repo_rel_info['tag_name'])
+    #logging.info("html_url: {}".format(repo_rel_info['html_url']))
+    if match.group(1) == "https://github.com":
+        archive_url = "https://codeload.github.com/{}/{}/tar.gz/{}".format(match.group(2), match.group(3), repo_rel_info['tag_name'])
+    else:
+        archive_url = "{}/_codeload/{}/{}/tar.gz/{}".format(match.group(1), match.group(2), match.group(3), repo_rel_info['tag_name'])
+    #logging.info("archive_url: {}".format(archive_url))
 
     fname = "{}-{}.tar.gz".format(repo, repo_rel_info['tag_name'])
     file = download_file(archive_url, fname=fname, token=token)
@@ -375,7 +381,8 @@ def main(url, force):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("-f", "--force", help="force creation of new hysds-framework release", action='store_true')
-    parser.add_argument("repo_api_url", help="Github API url for repo, e.g. https://github.jpl.nasa.gov/api/v3")
+    parser.add_argument("repo_api_url", help="Github API url for repo, e.g. https://github.jpl.nasa.gov/api/v3 or" + \
+                        " https://api.github.com")
     args = parser.parse_args()
     main(args.repo_api_url, args.force)
 
