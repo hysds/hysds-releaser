@@ -1,0 +1,89 @@
+commit fef40f76dff23820f926c0fc71cf514906f072aa
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Oct 3 17:44:20 2017 +0000
+
+    update
+
+commit deffebd65187aa972e79ab07a0150dbddae411d4
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Oct 3 17:42:34 2017 +0000
+
+    update instructions on updating hysds-framework's latest_release.txt
+
+commit 047d31b827e1e6e7f590fe13fac39f5303873990
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Oct 3 17:36:46 2017 +0000
+
+    remove; need to add to hysds-framework
+
+commit 99600ee841750fc440100adb6fb50bea125ed321
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Tue Oct 3 17:33:46 2017 +0000
+
+    add current_release.txt
+
+commit fbfcd8a20bc9ad3064c63ad380cd9fc7da669577
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 20:07:08 2017 +0000
+
+    update README with usage; remove verbose logging
+
+commit 1124e9d487cc7d8a90564a1af3736407efe58a0f
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 17:56:13 2017 +0000
+
+    create new framework release
+
+commit 7ac2ccfb1b678c0a9506b91d5e0c07b3a01e4671
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 15:29:46 2017 +0000
+
+    create new release
+
+commit 884eb342b8627432b8589ecb6bdd9c151dd25e7c
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 15:12:37 2017 +0000
+
+    prompt user for release body input
+
+commit 820710fc20f83b5bad0068cb8cc7ddf0492fa4e0
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 14:08:56 2017 +0000
+
+    prompt for release name
+
+commit 57ace16659ac5c3908761a768a39573a9cb98c17
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 13:59:16 2017 +0000
+
+    improve prompts
+
+commit 32daa156d33188d11e4540cd71a346caf148e700
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Sep 14 13:46:58 2017 +0000
+
+    add pattern matching and color coding
+
+commit 0357fe46bc62dcc647981bcac979e3ae3c0f5d46
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Sep 13 15:53:30 2017 +0000
+
+    query for latest release and commits
+
+commit e6dfa1ef5960adcf33d5d1df0f4958402bfe3c7a
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Sep 13 15:06:51 2017 +0000
+
+    add token parsing functions
+
+commit 1ca0a02fae6432ad4cfb3d2f1abf55e58f84c61a
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Sep 13 14:35:35 2017 +0000
+
+    chmod executable
+
+commit e5827773a944ab6dcb11c675e4a2b717d9e572b8
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Sep 13 14:33:52 2017 +0000
+
+    initial import
