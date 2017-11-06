@@ -31,3 +31,9 @@ optional arguments:
    ```
    ./create_release.py https://github.jpl.nasa.gov/api/v3
    ```
+
+   or
+
+   ```
+   ./create_release.py https://api.github.com
+   ```
