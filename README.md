@@ -17,7 +17,7 @@ attaches them to the new hysds-framework release.
 
 positional arguments:
   repo_api_url  Github API url for repo, e.g.
-                https://github.jpl.nasa.gov/api/v3
+                https://github.jpl.nasa.gov/api/v3 or https://api.github.com
 
 optional arguments:
   -h, --help    show this help message and exit
