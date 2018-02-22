@@ -74,6 +74,9 @@ REPO_CFGS = {
     "s3-bucket-listing": {
         "owner": "hysds"
     },
+    "sdscli": {
+        "owner": "sdskit"
+    },
     "sciflo": {
         "owner": "hysds"
     },
