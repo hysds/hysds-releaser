@@ -53,9 +53,6 @@ REPO_CFGS = {
     "hysds-dockerfiles": {
         "owner": "hysds"
     },
-    "hysds_cluster_setup": {
-        "owner": "hysds"
-    },
     "hysds_commons": {
         "owner": "hysds"
     },
