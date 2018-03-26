@@ -50,6 +50,9 @@ REPO_CFGS = {
     "hysds": {
         "owner": "hysds"
     },
+    "hysds-cloud-functions": {
+        "owner": "hysds"
+    },
     "hysds-dockerfiles": {
         "owner": "hysds"
     },
