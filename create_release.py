@@ -299,7 +299,8 @@ def create_new_framework_release(url, token, owner, repo, latest_rel_info, repo_
     for i in repo_rel_info:
         rinfo = repo_rel_info[i]
         if rinfo.get('update_for_hysds-framework', False):
-            prompt += "  - {}[{}]: {}\n".format(i, rinfo['tag_name'], rinfo['html_url'])
+            prompt += "# {}[{}] ({}):\n".format(i, rinfo['tag_name'], rinfo['html_url'])
+            prompt += "{}\n".format(rinfo['body'])
     body = get_editor_input(prompt)
     #logging.info("body: {}".format(body))
     rel_body = {
