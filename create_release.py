@@ -12,10 +12,10 @@ Automate the creation of a new HySDS framework release. This scripts:
    for each hysds-framework repository and attaches them to the new hysds-framework
    release.
 """
-from __future__ import print_function
+
 import os, sys, re, requests, json, logging, argparse, tempfile
 from subprocess import call
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 
 log_format = "[%(asctime)s: %(levelname)s/%(funcName)s] %(message)s"
@@ -95,7 +95,7 @@ COLOR_CODE = {
 }
 
 
-def mask_token(url): return TOKEN_RE.sub(r'\1xxxxxxxx@\2', url)
+def mask_token(token, url): return url.replace(token, 'xxxxxxxx')
 
 
 def highlight(s, color="green", bold=True):
@@ -124,11 +124,11 @@ def get_token(url):
     if token is not None: return token, api_url
     tkn_file = os.path.join(os.path.expanduser("~"), ".git_oauth_token")
     if not os.path.exists(tkn_file):
-       raise(RuntimeError("Github token not specified in URL or in {}.".format(tkn_file)))
+       raise RuntimeError("Github token not specified in URL or in {}.".format(tkn_file))
     with open(tkn_file) as f:
         match = TOKEN_RE.search(f.read())
     if not match:
-       raise(RuntimeError("Failed to get GitHub token from {}".format(tkn_file)))
+       raise RuntimeError("Failed to get GitHub token from {}".format(tkn_file))
     return match.group(1), api_url
     
 
@@ -146,14 +146,15 @@ def call_github_api(url, token, method="get", **kargs):
 def get_input(prompt, regex=None):
     """Get input from user."""
 
+    prompt = str(prompt)
     while True:
-        val = raw_input(prompt).strip()
+        val = input(prompt).strip()
         while True:
             if val == '': break
             if regex is not None and not regex.search(val):
                 print(highlight("Invalid format. Try to match pattern: {}".format(regex.pattern), "red"))
                 break
-            confirm = raw_input("You typed: {}. Are you sure? [y/n]: ".format(highlight(val))).strip().lower()
+            confirm = input("You typed: {}. Are you sure? [y/n]: ".format(highlight(val))).strip().lower()
             if confirm == 'y': return val
             elif confirm == 'n': break
             else: continue
@@ -166,14 +167,14 @@ def get_editor_input(prompt):
     prompt = CR_RE.sub("", prompt)
     while True:
         with tempfile.NamedTemporaryFile(suffix=".tmp") as f:
-            f.write(prompt)
+            f.write(prompt.encode())
             f.flush()
             call([os.environ.get('EDITOR', 'vim'), f.name])
             f.seek(0)
-            val = f.read()
+            val = f.read().decode()
         while True:
             if val == '': break
-            confirm = raw_input("You typed:\n\n{}\n\nAre you sure? [y/n]: ".format(highlight(val))).strip().lower()
+            confirm = input("You typed:\n\n{}\n\nAre you sure? [y/n]: ".format(highlight(val))).strip().lower()
             if confirm == 'y': return val
             elif confirm == 'n': break
             else: continue
@@ -241,7 +242,7 @@ def upload_file(url, token, fname, file):
         'Authorization': 'token %s' % token,
         'Content-Type': "application/octet-stream"
     }
-    r = requests.post("{}?name={}".format(url, fname), data=open(file, 'r'), headers=headers)
+    r = requests.post("{}?name={}".format(url, fname), data=open(file, 'rb'), headers=headers)
     if r.status_code not in (200, 201):
         logging.error("Error response: {}".format(r.content))
     r.raise_for_status()
@@ -253,7 +254,7 @@ def upload_repo_asset(url, token, owner, fw_repo, new_rel_info, repo, repo_rel_i
 
     # get upload url
     match = UPLOAD_RE.search(new_rel_info['upload_url'])
-    if not match: raise(RuntimeError("Failed to detect url from upload_url"))
+    if not match: raise RuntimeError("Failed to detect url from upload_url")
     upload_url = match.group(1)
     #logging.info("upload_url: {}".format(upload_url))
 
@@ -264,7 +265,7 @@ def upload_repo_asset(url, token, owner, fw_repo, new_rel_info, repo, repo_rel_i
     # use codeload url to get apprpriately named directory
     #logging.info("repo_rel_info: {}".format(json.dumps(repo_rel_info, indent=2, sort_keys=True)))
     match = HOST_RE.search(repo_rel_info['html_url'])
-    if not match: raise(RuntimeError("Failed to detect host from html_url"))
+    if not match: raise RuntimeError("Failed to detect host from html_url")
     #logging.info("html_url: {}".format(repo_rel_info['html_url']))
     if match.group(1) == "https://github.com":
         archive_url = "https://codeload.github.com/{}/{}/tar.gz/{}".format(match.group(2), match.group(3), repo_rel_info['tag_name'])
@@ -326,7 +327,7 @@ def main(url, force):
 
     token, api_url = get_token(url)
     #logging.info("Github token: {}".format(token))
-    logging.info("Github repo URL: {}".format(mask_token(url)))
+    logging.info("Github repo URL: {}".format(mask_token(token, url)))
 
     # do a new hysds-framework release
     new_framework_release = True if force else False
