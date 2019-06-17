@@ -38,6 +38,9 @@ FRAMEWORK_CFG = {
 
 
 REPO_CFGS = {
+    "chimera": {
+        "owner": "hysds"
+    },
     "container-builder": {
         "owner": "hysds"
     },
@@ -66,6 +69,9 @@ REPO_CFGS = {
         "owner": "hysds"
     },
     "osaka": {
+        "owner": "hysds"
+    },
+    "pele": {
         "owner": "hysds"
     },
     "prov_es": {
