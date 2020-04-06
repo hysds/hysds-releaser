@@ -91,6 +91,9 @@ REPO_CFGS = {
     },
     "tosca": {
         "owner": "hysds"
+    },
+    "hysds_ui": {
+        "owner": "hysds"
     }
 }
 
