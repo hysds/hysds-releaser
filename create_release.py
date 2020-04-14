@@ -44,9 +44,6 @@ REPO_CFGS = {
     "container-builder": {
         "owner": "hysds"
     },
-    "figaro": {
-        "owner": "hysds"
-    },
     "grq2": {
         "owner": "hysds"
     },
@@ -87,9 +84,6 @@ REPO_CFGS = {
         "owner": "hysds"
     },
     "spyddder-man": {
-        "owner": "hysds"
-    },
-    "tosca": {
         "owner": "hysds"
     },
     "hysds_ui": {
