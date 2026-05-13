@@ -32,6 +32,8 @@ def main(url):
         # compare latest release with target_commitish (master)
         tag_name = latest_rel_info['tag_name']
         target_commitish = latest_rel_info['target_commitish']
+        if repo == "hysds_ui":
+            target_commitish = "develop"
         logging.info("tag_name: {}".format(tag_name))
         logging.info("target_commitish: {}".format(target_commitish))
         coms_api_url = "{}/repos/{}/{}/compare/{}...{}".format(url, owner, repo, tag_name, target_commitish)
